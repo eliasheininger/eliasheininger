@@ -1,6 +1,5 @@
 import Image from "next/image";
-import ProjectSection from "../components/ProjectSection";
-import { codingProjects } from "../data/projects";
+
 import { ArrowUpRight } from "lucide-react";
 import AnimatedSection from "../components/AnimatedSection";
 
@@ -61,14 +60,16 @@ export default function Home() {
         </AnimatedSection>
         <AnimatedSection delay={1.0}>
           <section id="current">
-            <h2 className="text-[1.5rem] mb-[1rem] mt-8">What I'm up to</h2>
+            <h2 className="text-[1.5rem] mb-[1rem] mt-8">
+              What I&apos;m up to
+            </h2>
             <p className="text-white/80 font-light text-[1rem] antialiased">
-              I recently joined acta, a venture studio in Berlin, where I'm
+              I recently joined acta, a venture studio in Berlin, where I&apos;m
               building, creating content and growing as a founder alongside
               amazing people.
               <br />
               <br />
-              Currently I'm building{" "}
+              Currently I&apos;m building{" "}
               <a
                 href="https://findpapersfast.com"
                 className="text-white/80 font-light text-[1rem] underline antialiased"
@@ -90,7 +91,8 @@ export default function Home() {
               <li>Audio snippets for biography AI</li>
               <li>Intimate chat relationship messenger with AI assist</li>
               <li>
-                'Alt' text for blind people using to navigate in surroundings
+                &apos;Alt&apos; text for blind people using to navigate in
+                surroundings
               </li>
               <li>Phone AI IDE to vibe-code on the go</li>
             </ul>
