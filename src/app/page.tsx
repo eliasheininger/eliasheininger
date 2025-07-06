@@ -49,7 +49,7 @@ export default function Home() {
         <AnimatedSection delay={0.5}>
           <div className="flex justify-center my-8">
             <Image
-              src="/elias2.jpg"
+              src="/Elias2.jpg"
               alt="Portrait of Elias"
               width={256}
               height={192}
