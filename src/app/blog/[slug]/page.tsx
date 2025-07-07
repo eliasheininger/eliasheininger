@@ -20,7 +20,7 @@ export default async function BlogPostPage({
   const fs = (await import("fs")).default;
   const path = (await import("path")).default;
   const BLOG_DIR = path.join(process.cwd(), "markdown/blog");
-  const { slug } = await params;
+  const { slug } = params;
   const filePath = path.join(BLOG_DIR, `${slug}.mdx`);
   if (!fs.existsSync(filePath)) return notFound();
   const source = fs.readFileSync(filePath, "utf8");
