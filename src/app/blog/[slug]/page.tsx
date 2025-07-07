@@ -12,11 +12,7 @@ export async function generateStaticParams() {
     .map((file) => ({ slug: file.replace(/\.mdx$/, "") }));
 }
 
-export default async function BlogPostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default async function BlogPostPage({ params }: any) {
   const fs = (await import("fs")).default;
   const path = (await import("path")).default;
   const BLOG_DIR = path.join(process.cwd(), "markdown/blog");
