@@ -2,6 +2,12 @@ import matter from "gray-matter";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 
+type BlogPageProps = {
+  params: {
+    slug: string;
+  };
+};
+
 export async function generateStaticParams() {
   const fs = (await import("fs")).default;
   const path = (await import("path")).default;
@@ -12,7 +18,7 @@ export async function generateStaticParams() {
     .map((file) => ({ slug: file.replace(/\.mdx$/, "") }));
 }
 
-export default async function BlogPostPage({ params }: any) {
+export default async function BlogPostPage({ params }: BlogPageProps) {
   const fs = (await import("fs")).default;
   const path = (await import("path")).default;
   const BLOG_DIR = path.join(process.cwd(), "markdown/blog");
