@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-black text-white flex items-center justify-center">
       <div className="max-w-2xl w-full px-6 py-[2rem] flex flex-col gap-12">
-        <nav className="w-full flex justify-start mb-1rem">
+        {/* <nav className="w-full flex justify-start mb-1rem">
           <ul className="flex gap-8 text-white/80 text-[1rem] font-light">
             <li>
               <a href="#current" className="hover:underline transition">
@@ -35,8 +35,13 @@ export default function Home() {
                 past
               </a>
             </li>
+            <li>
+              <a href="/blog" className="hover:underline transition">
+                blog
+              </a>
+            </li>
           </ul>
-        </nav>
+        </nav> */}
         <AnimatedSection delay={0}>
           <section>
             <h1 className="text-[3rem] mb-2">Elias Heininger</h1>
@@ -46,14 +51,14 @@ export default function Home() {
             </p>
           </section>
         </AnimatedSection>
-        <AnimatedSection delay={0.5}>
+        <AnimatedSection delay={0.8}>
           <div className="flex justify-center my-8">
             <Image
               src="/Elias2.JPG"
               alt="Portrait of Elias"
               width={256}
               height={192}
-              className="rounded-lg object-cover w-full h-76 md:h-96"
+              className=" object-cover w-full h-76 md:h-96"
               priority
             />
           </div>
