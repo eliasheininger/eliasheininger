@@ -32,13 +32,16 @@ export default function BlogPage() {
         <ul className="space-y-6">
           {posts.map((post) => (
             <li key={post.slug}>
-              <Link href={`/blog/${post.slug}`} className="text-xl">
+              <Link
+                href={`/blog/${post.slug}`}
+                className="text-xl hover:underline cursor-pointer transition-all duration-300"
+              >
                 {post.title}
               </Link>
               <div className="text-gray-400 text-[1rem] mb-1 font-light">
                 {post.date}
               </div>
-              <div className="text-gray-300 text-base font-light">
+              <div className="text-white text-[1rem] font-light">
                 {post.description}
               </div>
             </li>
