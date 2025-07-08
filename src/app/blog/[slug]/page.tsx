@@ -2,12 +2,6 @@ import matter from "gray-matter";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 
-type BlogPageProps = {
-  params: {
-    slug: string;
-  };
-};
-
 export async function generateStaticParams() {
   const fs = (await import("fs")).default;
   const path = (await import("path")).default;
@@ -18,11 +12,15 @@ export async function generateStaticParams() {
     .map((file) => ({ slug: file.replace(/\.mdx$/, "") }));
 }
 
-export default async function BlogPostPage({ params }: BlogPageProps) {
+export default async function BlogPostPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
   const fs = (await import("fs")).default;
   const path = (await import("path")).default;
   const BLOG_DIR = path.join(process.cwd(), "markdown/blog");
-  const { slug } = params;
   const filePath = path.join(BLOG_DIR, `${slug}.mdx`);
   if (!fs.existsSync(filePath)) return notFound();
   const source = fs.readFileSync(filePath, "utf8");
