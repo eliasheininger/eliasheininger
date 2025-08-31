@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 const navLinks = [
   { name: "life", href: "/" },
-  { name: "blog", href: "/blog" },
+  // { name: "blog", href: "/blog" },
 ];
 
 export default function RootLayout({
