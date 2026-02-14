@@ -51,6 +51,7 @@ export const siteData: SiteData = {
   dockItems: [
     // My apps
     { id: "nova", icon: "nova", label: "Nova", type: "link", url: "https://withnova.app" },
+    { id: "terminal", icon: "terminal", label: "Terminal", type: "window", windowId: "terminal" },
     // Get in contact
     { id: "email", icon: "gmail", label: "Email", type: "link", url: "mailto:elias@eliasheininger.com" },
     { id: "cal", icon: "cal", label: "Cal", type: "window", windowId: "cal" },

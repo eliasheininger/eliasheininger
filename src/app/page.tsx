@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Desktop from "@/components/desktop/Desktop";
 import MobileLayout from "@/components/mobile/MobileLayout";
+import { ActivityLogProvider } from "@/hooks/useActivityLog";
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
@@ -26,5 +27,9 @@ export default function Home() {
     );
   }
 
-  return isMobile ? <MobileLayout /> : <Desktop />;
+  return (
+    <ActivityLogProvider>
+      {isMobile ? <MobileLayout /> : <Desktop />}
+    </ActivityLogProvider>
+  );
 }

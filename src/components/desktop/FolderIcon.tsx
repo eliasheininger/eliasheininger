@@ -14,13 +14,13 @@ export default function FolderIcon({ label, onClick }: FolderIconProps) {
       className="flex flex-col items-center gap-1 p-2 rounded-lg folder-button"
     >
       <Image
-        src="/folder.svg"
+        src="/folder2.svg"
         alt="Folder"
         width={64}
         height={64}
         className="folder-icon"
       />
-      <span className="text-xs text-black capitalize">{label}</span>
+      <span className="text-sm font-medium text-black/80 capitalize">{label}</span>
     </button>
   );
 }

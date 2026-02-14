@@ -5,16 +5,26 @@ import { useState, useCallback } from "react";
 export interface WindowState {
   openWindows: string[];
   windowOrder: string[];
+  minimizedWindows: string[];
 }
 
-export function useWindowManager(initialWindow?: string) {
+export function useWindowManager(...initialWindows: string[]) {
   const [state, setState] = useState<WindowState>({
-    openWindows: initialWindow ? [initialWindow] : [],
-    windowOrder: initialWindow ? [initialWindow] : [],
+    openWindows: initialWindows,
+    windowOrder: initialWindows,
+    minimizedWindows: [],
   });
 
   const openWindow = useCallback((id: string) => {
     setState((prev) => {
+      // If minimized, restore it
+      if (prev.minimizedWindows.includes(id)) {
+        return {
+          openWindows: [...prev.openWindows, id],
+          windowOrder: [...prev.windowOrder, id],
+          minimizedWindows: prev.minimizedWindows.filter((w) => w !== id),
+        };
+      }
       if (prev.openWindows.includes(id)) {
         // Window already open, just focus it
         return {
@@ -23,6 +33,7 @@ export function useWindowManager(initialWindow?: string) {
         };
       }
       return {
+        ...prev,
         openWindows: [...prev.openWindows, id],
         windowOrder: [...prev.windowOrder, id],
       };
@@ -31,8 +42,19 @@ export function useWindowManager(initialWindow?: string) {
 
   const closeWindow = useCallback((id: string) => {
     setState((prev) => ({
+      ...prev,
       openWindows: prev.openWindows.filter((w) => w !== id),
       windowOrder: prev.windowOrder.filter((w) => w !== id),
+      minimizedWindows: prev.minimizedWindows.filter((w) => w !== id),
+    }));
+  }, []);
+
+  const minimizeWindow = useCallback((id: string) => {
+    setState((prev) => ({
+      ...prev,
+      openWindows: prev.openWindows.filter((w) => w !== id),
+      windowOrder: prev.windowOrder.filter((w) => w !== id),
+      minimizedWindows: [...prev.minimizedWindows, id],
     }));
   }, []);
 
@@ -59,12 +81,19 @@ export function useWindowManager(initialWindow?: string) {
     [state.openWindows]
   );
 
+  const isMinimized = useCallback(
+    (id: string) => state.minimizedWindows.includes(id),
+    [state.minimizedWindows]
+  );
+
   return {
     state,
     openWindow,
     closeWindow,
+    minimizeWindow,
     focusWindow,
     getZIndex,
     isOpen,
+    isMinimized,
   };
 }

@@ -18,6 +18,7 @@ const imageIcons: Record<string, string> = {
   chrome: "/chrome.png",
   instagram: "/instagram.png",
   nova: "/nova.png",
+  terminal: "/terminal.png",
 };
 
 export default function DockItem({ icon, label, onClick }: DockItemProps) {
