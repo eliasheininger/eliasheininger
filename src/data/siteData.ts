@@ -1,6 +1,7 @@
 export interface FolderItem {
   id: string;
   label: string;
+  icon?: string;
 }
 
 export interface DockItem {
@@ -17,6 +18,8 @@ export interface WindowConfig {
   type: "text" | "embed";
   content?: string;
   url?: string;
+  externalUrl?: string;
+  image?: string;
   defaultPosition?: { x: number; y: number };
   width?: number;
   height?: number;
@@ -42,10 +45,10 @@ export const siteData: SiteData = {
   currentFocus: "Travel/Tinkering",
 
   folders: [
-    { id: "work", label: "work" },
-    { id: "life", label: "life" },
-    { id: "projects", label: "projects" },
-    { id: "ideas", label: "ideas" },
+    { id: "work", label: "work", icon: "/folderBlue.svg" },
+    { id: "story", label: "life", icon: "/folderGreen.svg" },
+    { id: "projects", label: "projects", icon: "/folderOrange.svg" },
+    { id: "ideas", label: "ideas", icon: "/folders.svg" },
   ],
 
   dockItems: [
@@ -53,27 +56,33 @@ export const siteData: SiteData = {
     { id: "nova", icon: "nova", label: "Nova", type: "link", url: "https://withnova.app" },
     { id: "terminal", icon: "terminal", label: "Terminal", type: "window", windowId: "terminal" },
     // Get in contact
-    { id: "email", icon: "gmail", label: "Email", type: "link", url: "mailto:elias@eliasheininger.com" },
+    { id: "email", icon: "gmail", label: "Email", type: "window", windowId: "email" },
     { id: "cal", icon: "cal", label: "Cal", type: "window", windowId: "cal" },
     // My Socials
-    { id: "instagram", icon: "instagram", label: "Instagram", type: "link", url: "https://instagram.com/eliasheininger" },
+    { id: "instagram", icon: "instagram", label: "Instagram", type: "window", windowId: "instagram" },
     { id: "x", icon: "x", label: "X", type: "link", url: "https://x.com/eliasheininger" },
     { id: "github", icon: "github", label: "GitHub", type: "link", url: "https://github.com/eliasheininger" },
   ],
 
   windows: {
     story: {
-      title: "My Story",
+      title: "Hi I'm Elias",
       type: "text",
-      content: `I grew up in a small town in Bavaria, Germany. From an early age, I was fascinated by technology and design - always tinkering with computers, building things, and dreaming up new ideas.
+      image: "/Elias3.jpg",
+      content: `I built and worked on stuff for as long as I can remember.
 
-I recently joined Acta, a venture studio in Berlin, where I'm building, creating content and growing as a founder alongside amazing people.
+I started by playing around with microcontrollers such as Arduino at 15 and later working on bikes and engines and whatever I could find.
 
-Currently I'm building an AI Agent to help infrastructure developers find and analyze the best plots for their projects based on GIS Data.
+At 21, I moved to a foreign country, which is where I started my first company and got into building software products.
 
-Before that, I started a Design and Software development Agency in Bangkok, Thailand. I've built tools like ShitCheck (an AI fact checker), FindPapersFast, and various other projects exploring the intersection of AI and practical problem-solving.
+At 23, I joined a Berlin-based venture studio, working alongside founders behind Jamie AI and Invincible Brands ($400M exit).
 
-I believe in building things that matter, learning by doing, and staying curious about everything.`,
+During that time, I built various products, including a fact-checking tool called shitcheck.com, which reached 1000s of people within a few weeks.
+
+My last project was an AI second brain organizing people’s thoughts and ideas automatically just by speaking to it. The app’s content reached over 1M views and got more than 2000 downloads.
+
+These days, I am exploring what to do next besides fun projects like this site.
+      `,
       defaultPosition: { x: 120, y: 80 },
     },
     work: {
@@ -87,16 +96,6 @@ Past work:
 - Built FindPapersFast & ReadPapersFast - AI tools for researchers
 - Various SaaS experiments in events, food delivery, and more`,
       defaultPosition: { x: 150, y: 100 },
-    },
-    life: {
-      title: "Life",
-      type: "text",
-      content: `Based in Berlin, Germany.
-
-I love exploring new places, meeting interesting people, and constantly learning new things.
-
-When I'm not coding or designing, you'll find me reading, traveling, or having deep conversations about ideas that matter.`,
-      defaultPosition: { x: 180, y: 120 },
     },
     projects: {
       title: "Projects",
@@ -132,6 +131,29 @@ Past:
       defaultPosition: { x: 200, y: 60 },
       width: 700,
       height: 500,
+    },
+    email: {
+      title: "Contact",
+      type: "text",
+      content: `Get in touch!
+
+Email: elias@eliasheininger.com
+
+I'm always happy to chat about new ideas, collaborations, or just to say hello.
+
+Feel free to reach out anytime.`,
+      defaultPosition: { x: 180, y: 100 },
+      width: 400,
+      height: 300,
+    },
+    instagram: {
+      title: "Instagram",
+      type: "embed",
+      url: "https://www.instagram.com/eliasheininger/embed",
+      externalUrl: "https://instagram.com/eliasheininger",
+      defaultPosition: { x: 220, y: 50 },
+      width: 500,
+      height: 700,
     },
   },
 

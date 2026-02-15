@@ -38,14 +38,14 @@ export default function InfoWidget({ className }: InfoWidgetProps) {
 
   return (
     <div className={className || "fixed top-12 right-4 z-0"}>
-      <div className="bg-white rounded-4xl  p-5 min-w-[180px] lg:min-w-[200px]  shadow-lg">
+      <div className="rounded bg-white border p-5 min-w-[180px] lg:min-w-[200px]">
         <div className="flex items-center gap-2 mb-1">
-          <span className={`md:text-xl text-base font-medium text-black ${isLoading ? "animate-pulse" : ""}`}>
+          <span className={`md:text-xl text-base font-garamond text-black ${isLoading ? "animate-pulse" : ""}`}>
             {location}
           </span>
         </div>
         <div className="flex items-center gap-2 mb-5">
-          <span className={`text-4xl font-regular text-black ${isLoading ? "animate-pulse" : ""}`}>
+          <span className={`text-4xl  text-black ${isLoading ? "animate-pulse" : ""}`}>
             {temperature}
           </span>
           <WeatherIcon className="w-6 h-6 text-black" />
@@ -54,7 +54,7 @@ export default function InfoWidget({ className }: InfoWidgetProps) {
           <div className="flex items-center gap-2">
             <span className="text-base text-black font-medium">Current focus</span>
           </div>
-          <p className="text-sm text-black">{siteData.currentFocus}</p>
+          <p className="text-sm text-black ">{siteData.currentFocus}</p>
         </div>
       </div>
     </div>

@@ -39,7 +39,7 @@ export default function TopBar({ onNavClick }: TopBarProps) {
     <div className="fixed top-0 left-0 right-0 h-8 bg-white/10 backdrop-blur-md  flex items-center justify-between px-4 z-50">
       {/* Left side - Name and nav */}
       <div className="flex items-center gap-6">
-        <span className="font-semibold text-sm text-black">
+        <span className="font-garamond text-sm text-black">
           {siteData.name}
         </span>
         <nav className="flex items-center gap-4">

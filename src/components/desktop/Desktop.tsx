@@ -65,7 +65,7 @@ export default function Desktop() {
   return (
     <div
       className="min-h-screen relative overflow-hidden bg-fit bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/vision.png')" }}
+      style={{ backgroundImage: "url('/vision2.png')" }}
     >
       {/* Top Menu Bar */}
       <TopBar onNavClick={handleNavClick} />
@@ -79,6 +79,7 @@ export default function Desktop() {
           <FolderIcon
             key={folder.id}
             label={folder.label}
+            icon={folder.icon}
             onClick={() => handleFolderClick(folder.id)}
           />
         ))}

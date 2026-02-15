@@ -14,7 +14,7 @@ interface DockProps {
 export default function Dock({ items, onItemClick, minimizedWindows = [], onRestoreWindow }: DockProps) {
   return (
     <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40">
-      <div className="flex items-center gap-1 px-3 py-2 bg-white/30 backdrop-blur-xl rounded-2xl border border-white/20 shadow-lg">
+      <div className="flex items-center gap-1 px-4 py-3 rounded-2xl ">
         {items.map((item, index) => (
           <div key={item.id} className="flex items-center">
             <DockItem

@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { Sparkles } from "lucide-react";
 
 interface DockItemProps {
   icon: string;
@@ -27,7 +26,7 @@ export default function DockItem({ icon, label, onClick }: DockItemProps) {
   return (
     <button
       onClick={onClick}
-      className="relative flex flex-col items-center gap-1 p-2 rounded-xl hover:bg-white/20 transition-all group"
+      className="relative flex flex-col items-center gap-1 p-1 rounded-xl hover:bg-white/20 transition-all group"
     >
       {/* Tooltip */}
       {label && (
@@ -35,27 +34,23 @@ export default function DockItem({ icon, label, onClick }: DockItemProps) {
           <div className="relative bg-white border px-3 py-1.5 rounded-lg">
             <span className="text-sm text-black whitespace-nowrap">{label}</span>
             {/* Triangle pointer */}
-            <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-b border-r  rotate-45" />
+            <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-b border-r rotate-45" />
           </div>
         </div>
       )}
 
-      <div className={`w-12 h-12 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform overflow-hidden ${icon === "cal" || icon === "gmail" ? "bg-white" : ""}`}>
+      <div className="w-18 h-18 flex items-center justify-center  group-hover:scale-110 transition-transform overflow-hidden">
         {imageSrc ? (
           <Image
             src={imageSrc}
             alt={label || icon}
             width={48}
             height={48}
-            className={`${icon === "cal" || icon === "gmail" ? "w-10 h-10 object-contain" : "w-full h-full object-cover"}`}
+            className="w-14 h-14 object-contain"
           />
-        ) : icon === "nova" ? (
-          <div className="w-full h-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
-            <Sparkles className="w-6 h-6 text-white" />
-          </div>
         ) : (
-          <div className="w-full h-full bg-gray-800 flex items-center justify-center">
-            <span className="text-white text-xs">{icon}</span>
+          <div className="w-full h-full bg-gray-100 flex items-center justify-center">
+            <span className="text-gray-500 text-xs">{icon}</span>
           </div>
         )}
       </div>
