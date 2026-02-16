@@ -99,6 +99,7 @@ export default function Desktop() {
             onClose={() => handleCloseWindow(id)}
             onFocus={() => focusWindow(id)}
             onMinimize={() => handleMinimizeWindow(id)}
+            onOpenWindow={openWindow}
           />
         ))}
       </div>
@@ -107,6 +108,7 @@ export default function Desktop() {
       <Dock
         items={siteData.dockItems}
         onItemClick={handleDockClick}
+        openWindows={state.openWindows}
         minimizedWindows={state.minimizedWindows}
         onRestoreWindow={openWindow}
       />

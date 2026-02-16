@@ -13,6 +13,7 @@ interface WindowProps {
   onClose: () => void;
   onFocus: () => void;
   onMinimize: () => void;
+  onOpenWindow?: (windowId: string) => void;
 }
 
 export default function Window({
@@ -22,6 +23,7 @@ export default function Window({
   onClose,
   onFocus,
   onMinimize,
+  onOpenWindow,
 }: WindowProps) {
   const defaultPos = config.defaultPosition || { x: 120, y: 80 };
   const defaultWidth = config.width || 480;
@@ -231,7 +233,16 @@ export default function Window({
         className={`window-content ${config.type === "embed" ? "p-0 flex flex-col" : "p-6"} overflow-y-auto flex-1`}
       >
         {config.type === "text" && (
-          <div className="text-black text-sm leading-relaxed whitespace-pre-wrap">
+          <div
+            className="text-black text-base leading-relaxed whitespace-pre-wrap"
+            onClick={(e) => {
+              const target = e.target as HTMLElement;
+              if (target.tagName === 'A' && target.dataset.window) {
+                e.preventDefault();
+                onOpenWindow?.(target.dataset.window);
+              }
+            }}
+          >
             {config.image && (
               <div className="mb-4">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -242,7 +253,7 @@ export default function Window({
                 />
               </div>
             )}
-            {config.content}
+            <div dangerouslySetInnerHTML={{ __html: config.content || "" }} />
           </div>
         )}
         {config.type === "embed" && config.url && (

@@ -34,11 +34,9 @@ const dockIcons: Record<string, string> = {
   github: "/github.png",
   cal: "/cal.png",
   nova: "/nova.png",
+  shitcheck: "/shitcheck.png",
   terminal: "/terminal.png",
 };
-
-// Icons that need white background
-const iconsWithWhiteBg = ["gmail", "cal"];
 
 interface ScreenProps {
   title: string;
@@ -46,9 +44,10 @@ interface ScreenProps {
   image?: string;
   isOpen: boolean;
   onClose: () => void;
+  onOpenScreen?: (screenId: string) => void;
 }
 
-function Screen({ title, content, image, isOpen, onClose }: ScreenProps) {
+function Screen({ title, content, image, isOpen, onClose, onOpenScreen }: ScreenProps) {
   const [translateY, setTranslateY] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -116,7 +115,7 @@ function Screen({ title, content, image, isOpen, onClose }: ScreenProps) {
       </div>
 
       {/* Screen Content */}
-      <div className="flex-1 flex flex-col p-6 overflow-y-auto">
+      <div className="flex-1 flex flex-col px-4 py-4 overflow-y-auto">
         {image && (
           <div className="mb-4">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -127,9 +126,17 @@ function Screen({ title, content, image, isOpen, onClose }: ScreenProps) {
             />
           </div>
         )}
-        <p className="text-black text-sm leading-relaxed whitespace-pre-wrap flex-1">
-          {content}
-        </p>
+        <div
+          className="text-black text-sm leading-relaxed whitespace-pre-wrap flex-1"
+          onClick={(e) => {
+            const target = e.target as HTMLElement;
+            if (target.tagName === 'A' && target.dataset.window) {
+              e.preventDefault();
+              onOpenScreen?.(target.dataset.window);
+            }
+          }}
+          dangerouslySetInnerHTML={{ __html: content }}
+        />
       </div>
 
       {/* Home Indicator */}
@@ -159,10 +166,13 @@ export default function MobileLayout() {
     }
   };
 
-  // Filter dock items for mobile
+  // Filter dock items for mobile - only core apps
   const mobileDockItems = siteData.dockItems.filter(
-    (item) => ["gmail", "cal", "instagram", "x", "github"].includes(item.icon)
+    (item) => ["nova", "shitcheck", "cal", "github"].includes(item.icon)
   );
+
+  // Mobile folders - same as desktop now that work is replaced with socials
+  const mobileFolders = siteData.folders;
 
   return (
     <div
@@ -183,7 +193,7 @@ export default function MobileLayout() {
 
         {/* Folders Grid */}
         <div className="justify-between flex gap-2 pt-4">
-          {siteData.folders.map((folder) => (
+          {mobileFolders.map((folder) => (
             <button
               key={folder.id}
               onClick={() => handleFolderClick(folder.id)}
@@ -201,42 +211,46 @@ export default function MobileLayout() {
         </div>
       </div>
 
-      {/* Apps Row - same layout as folders */}
-      <div className="fixed bottom-8 left-0 right-0 px-4 z-40">
-        <div className="justify-between flex gap-2">
-          {mobileDockItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => handleDockClick(item)}
-              className="flex flex-col items-center gap-2"
-            >
-              <div className={`w-16 h-16 overflow-hidden flex items-center justify-center ${
-                iconsWithWhiteBg.includes(item.icon) ? "" : ""
-              }`}>
-                {dockIcons[item.icon] ? (
-                  <Image
-                    src={dockIcons[item.icon]}
-                    alt={item.label || item.icon}
-                    width={iconsWithWhiteBg.includes(item.icon) ? 40 : 64}
-                    height={iconsWithWhiteBg.includes(item.icon) ? 40 : 64}
-                    className={iconsWithWhiteBg.includes(item.icon) ? "object-contain" : "w-full h-full object-cover p-2"}
-                  />
-                ) : (
-                  <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                    <span className="text-xs text-gray-500">{item.icon}</span>
-                  </div>
+      {/* Apps Row - matching desktop dock style */}
+      <div className="fixed bottom-6 left-0 right-0 px-4 z-40">
+        <div className="flex items-center justify-between px-4 py-4 bg-white/80 backdrop-blur-sm rounded border">
+          {mobileDockItems.map((item) => {
+            const isItemOpen = item.windowId ? openScreen === item.windowId : false;
+            return (
+              <button
+                key={item.id}
+                onClick={() => handleDockClick(item)}
+                className="relative"
+              >
+                <div className="w-18 h-18 rounded border bg-white flex items-center justify-center active:scale-95 transition-transform">
+                  {dockIcons[item.icon] ? (
+                    <Image
+                      src={dockIcons[item.icon]}
+                      alt={item.label || item.icon}
+                      width={36}
+                      height={36}
+                      className="w-9 h-9 object-contain"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gray-100 flex items-center justify-center rounded">
+                      <span className="text-xs text-gray-500">{item.icon}</span>
+                    </div>
+                  )}
+                </div>
+                {/* Open indicator dot */}
+                {isItemOpen && (
+                  <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-black/60 rounded-full" />
                 )}
-              </div>
-            
-            </button>
-          ))}
+              </button>
+            );
+          })}
         </div>
       </div>
 
       {/* Screens */}
-      {siteData.folders.map((folder) => {
+      {mobileFolders.map((folder) => {
         const windowConfig = siteData.windows[folder.id];
-        if (!windowConfig) return null;
+        if (!windowConfig || windowConfig.type !== "text") return null;
         return (
           <Screen
             key={folder.id}
@@ -245,6 +259,7 @@ export default function MobileLayout() {
             image={windowConfig.image}
             isOpen={openScreen === folder.id}
             onClose={handleCloseScreen}
+            onOpenScreen={setOpenScreen}
           />
         );
       })}
@@ -284,11 +299,12 @@ export default function MobileLayout() {
           content={siteData.windows.email?.content || ""}
           isOpen={true}
           onClose={handleCloseScreen}
+          onOpenScreen={setOpenScreen}
         />
       )}
 
-      {/* Instagram Screen */}
-      {openScreen === "instagram" && (
+      {/* Nova Screen */}
+      {openScreen === "nova" && (
         <div className="fixed inset-0 z-50 bg-white flex flex-col">
           <div className="flex items-center gap-2 px-4 py-3 bg-white flex-shrink-0">
             <button
@@ -299,12 +315,12 @@ export default function MobileLayout() {
             </button>
             <div className="w-3.5 h-3.5 rounded-full bg-[#FEBC2E]" />
             <div className="w-3.5 h-3.5 rounded-full bg-[#28C840]" />
-            <span className="ml-2 text-sm text-black font-garamond">Instagram</span>
+            <span className="ml-2 text-sm text-black font-garamond">Nova</span>
           </div>
           <iframe
-            src={siteData.windows.instagram?.url}
+            src={siteData.windows.nova?.url}
             className="flex-1 w-full border-0"
-            title="Instagram"
+            title="Nova"
           />
           <button onClick={handleCloseScreen} className="pb-2 pt-1 bg-white">
             <div className="w-32 h-1 bg-black rounded-full mx-auto" />
@@ -312,6 +328,30 @@ export default function MobileLayout() {
         </div>
       )}
 
+      {/* ShitCheck Screen */}
+      {openScreen === "shitcheck" && (
+        <div className="fixed inset-0 z-50 bg-white flex flex-col">
+          <div className="flex items-center gap-2 px-4 py-3 bg-white flex-shrink-0">
+            <button
+              onClick={handleCloseScreen}
+              className="w-3.5 h-3.5 rounded-full bg-[#FF5F57] flex items-center justify-center"
+            >
+              <X className="w-2.5 h-2.5 text-[#880000]" strokeWidth={2.5} />
+            </button>
+            <div className="w-3.5 h-3.5 rounded-full bg-[#FEBC2E]" />
+            <div className="w-3.5 h-3.5 rounded-full bg-[#28C840]" />
+            <span className="ml-2 text-sm text-black font-garamond">ShitCheck</span>
+          </div>
+          <iframe
+            src={siteData.windows.shitcheck?.url}
+            className="flex-1 w-full border-0"
+            title="ShitCheck"
+          />
+          <button onClick={handleCloseScreen} className="pb-2 pt-1 bg-white">
+            <div className="w-32 h-1 bg-black rounded-full mx-auto" />
+          </button>
+        </div>
+      )}
     </div>
   );
 }

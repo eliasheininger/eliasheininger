@@ -45,7 +45,7 @@ export const siteData: SiteData = {
   currentFocus: "Travel/Tinkering",
 
   folders: [
-    { id: "work", label: "work", icon: "/folderBlue.svg" },
+    { id: "socials", label: "socials", icon: "/folderBlue.svg" },
     { id: "story", label: "life", icon: "/folderGreen.svg" },
     { id: "projects", label: "projects", icon: "/folderOrange.svg" },
     { id: "ideas", label: "ideas", icon: "/folders.svg" },
@@ -53,7 +53,8 @@ export const siteData: SiteData = {
 
   dockItems: [
     // My apps
-    { id: "nova", icon: "nova", label: "Nova", type: "link", url: "https://withnova.app" },
+    { id: "nova", icon: "nova", label: "Nova", type: "window", windowId: "nova" },
+    { id: "shitcheck", icon: "shitcheck", label: "ShitCheck", type: "window", windowId: "shitcheck" },
     { id: "terminal", icon: "terminal", label: "Terminal", type: "window", windowId: "terminal" },
     // Get in contact
     { id: "email", icon: "gmail", label: "Email", type: "window", windowId: "email" },
@@ -77,12 +78,11 @@ At 21, I moved to a foreign country, which is where I started my first company a
 
 At 23, I joined a Berlin-based venture studio, working alongside founders behind Jamie AI and Invincible Brands ($400M exit).
 
-During that time, I built various products, including a fact-checking tool called shitcheck.com, which reached 1000s of people within a few weeks.
+During that time, I built various products, including a fact-checking tool called <a href="#" data-window="shitcheck" class="underline cursor-pointer">shitcheck.com</a>, which reached 1000s of people within a few weeks.
 
-My last project was an AI second brain organizing people’s thoughts and ideas automatically just by speaking to it. The app’s content reached over 1M views and got more than 2000 downloads.
+My last project was an <a href="#" data-window="nova" class="underline cursor-pointer">AI second brain</a> organizing people's thoughts and ideas automatically just by speaking to it. The app's content reached over 1M views and got more than 2000 downloads.
 
-These days, I am exploring what to do next besides fun projects like this site.
-      `,
+These days, I am exploring what to do next besides fun projects like this site.`,
       defaultPosition: { x: 120, y: 80 },
     },
     work: {
@@ -137,7 +137,7 @@ Past:
       type: "text",
       content: `Get in touch!
 
-Email: elias@eliasheininger.com
+Email: eliasheininger@web.de
 
 I'm always happy to chat about new ideas, collaborations, or just to say hello.
 
@@ -154,6 +154,42 @@ Feel free to reach out anytime.`,
       defaultPosition: { x: 220, y: 50 },
       width: 500,
       height: 700,
+    },
+    nova: {
+      title: "Nova",
+      type: "embed",
+      url: "https://withnova.app",
+      externalUrl: "https://withnova.app",
+      defaultPosition: { x: 180, y: 50 },
+      width: 500,
+      height: 700,
+    },
+    shitcheck: {
+      title: "ShitCheck",
+      type: "embed",
+      url: "https://shitcheck.com",
+      externalUrl: "https://shitcheck.com",
+      defaultPosition: { x: 200, y: 60 },
+      width: 500,
+      height: 700,
+    },
+    socials: {
+      title: "Socials",
+      type: "text",
+      content: `Find me on:
+
+<a href="https://instagram.com/eliasheininger" target="_blank" class="underline">Instagram</a>
+
+<a href="https://x.com/eliasheininger" target="_blank" class="underline">X (Twitter)</a>
+
+<a href="https://github.com/eliasheininger" target="_blank" class="underline">GitHub</a>
+
+<a href="https://linkedin.com/in/eliasheininger" target="_blank" class="underline">LinkedIn</a>
+
+Email: <a href="mailto:eliasheininger@web.de" class="underline">eliasheininger@web.de</a>`,
+      defaultPosition: { x: 180, y: 100 },
+      width: 350,
+      height: 320,
     },
   },
 
