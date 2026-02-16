@@ -47,21 +47,21 @@ export default function InfoWidget({ className }: InfoWidgetProps) {
         style={{ backgroundImage: `url('${bgImage}')` }}
       >
         <div className="flex items-center gap-2 mb-1">
-          <span className={`md:text-xl text-xl font-garamond text-white ${isLoading ? "animate-pulse" : ""}`}>
+          <span className={`md:text-xl text-xl font-garamond text-white drop-shadow-md ${isLoading ? "animate-pulse" : ""}`}>
             {location}
           </span>
         </div>
         <div className="flex items-center gap-2 mb-5">
-          <span className={`text-4xl text-white ${isLoading ? "animate-pulse" : ""}`}>
+          <span className={`text-4xl text-white drop-shadow-md ${isLoading ? "animate-pulse" : ""}`}>
             {temperature}
           </span>
-          <WeatherIcon className="w-6 h-6 text-white" />
+          <WeatherIcon className="w-6 h-6 text-white drop-shadow-md" />
         </div>
         <div className="pt-3">
           <div className="flex items-center gap-2">
-            <span className="text-base text-white font-medium">Current focus</span>
+            <span className="text-base text-white font-medium drop-shadow-md">Current focus</span>
           </div>
-          <p className="text-sm text-white">{siteData.currentFocus}</p>
+          <p className="text-sm text-white drop-shadow-md">{siteData.currentFocus}</p>
         </div>
       </div>
     </div>
