@@ -111,7 +111,7 @@ function Screen({ title, content, image, isOpen, onClose, onOpenScreen }: Screen
         </button>
         <div className="w-3.5 h-3.5 rounded-full bg-[#FEBC2E]" />
         <div className="w-3.5 h-3.5 rounded-full bg-[#28C840]" />
-        <span className="ml-2 text-sm text-black font-garamond">{title}</span>
+        <span className="ml-2 text-base text-black font-garamond">{title}</span>
       </div>
 
       {/* Screen Content */}
@@ -127,7 +127,7 @@ function Screen({ title, content, image, isOpen, onClose, onOpenScreen }: Screen
           </div>
         )}
         <div
-          className="text-black text-sm leading-relaxed whitespace-pre-wrap flex-1"
+          className="text-black text-base leading-relaxed whitespace-pre-wrap flex-1"
           onClick={(e) => {
             const target = e.target as HTMLElement;
             if (target.tagName === 'A' && target.dataset.window) {
@@ -148,7 +148,7 @@ function Screen({ title, content, image, isOpen, onClose, onOpenScreen }: Screen
 }
 
 export default function MobileLayout() {
-  const [openScreen, setOpenScreen] = useState<string | null>(null);
+  const [openScreen, setOpenScreen] = useState<string | null>("story");
 
   const handleFolderClick = (id: string) => {
     setOpenScreen(id);
@@ -192,7 +192,7 @@ export default function MobileLayout() {
         <InfoWidget className="mb-4" />
 
         {/* Folders Grid */}
-        <div className="justify-between flex gap-2 pt-4">
+        <div className="flex justify-between gap-8 pt-4">
           {mobileFolders.map((folder) => (
             <button
               key={folder.id}

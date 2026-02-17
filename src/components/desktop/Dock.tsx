@@ -17,7 +17,7 @@ export default function Dock({ items, onItemClick, openWindows = [], minimizedWi
     <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40">
       <div className="flex items-center gap-2 px-4 py-4 bg-white/80 backdrop-blur-sm rounded border">
         {items.map((item, index) => (
-          <div key={item.id} className="flex items-center">
+          <div key={item.id} className="flex items-center gap-2">
             <DockItem
               icon={item.icon}
               label={item.label}
@@ -26,7 +26,7 @@ export default function Dock({ items, onItemClick, openWindows = [], minimizedWi
             />
             {/* Dividers between groups */}
             {(index === 2 || index === 4) && index < items.length - 1 && (
-              <div className="w-px h-8 bg-gray-400/30 mx-1" />
+              <div className="w-px h-8 bg-gray-400/30" />
             )}
           </div>
         ))}
