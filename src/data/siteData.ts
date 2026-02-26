@@ -47,8 +47,6 @@ export const siteData: SiteData = {
   folders: [
     { id: "socials", label: "socials", icon: "/folderBlue.svg" },
     { id: "story", label: "life", icon: "/folderGreen.svg" },
-    { id: "projects", label: "projects", icon: "/folderOrange.svg" },
-    { id: "ideas", label: "ideas", icon: "/folders.svg" },
   ],
 
   dockItems: [

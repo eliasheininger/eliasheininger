@@ -192,7 +192,7 @@ export default function MobileLayout() {
         <InfoWidget className="mb-4" />
 
         {/* Folders Grid */}
-        <div className="flex justify-between gap-8 pt-4">
+        <div className="flex justify-start gap-8 pt-4">
           {mobileFolders.map((folder) => (
             <button
               key={folder.id}
