@@ -168,7 +168,7 @@ export default function Window({
   return (
     <div
       ref={windowRef}
-      className={`absolute bg-white shadow-2xl overflow-hidden border rounded flex flex-col ${
+      className={`absolute bg-white/90 backdrop-blur-xl shadow-2xl overflow-hidden rounded-4xl flex flex-col ${
         isDragging ? "cursor-grabbing" : ""
       } ${isResizing ? "select-none" : ""} ${
         isMinimizing ? "pointer-events-none" : "animate-window-open"

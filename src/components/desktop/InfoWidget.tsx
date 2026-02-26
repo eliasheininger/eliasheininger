@@ -43,7 +43,7 @@ export default function InfoWidget({ className }: InfoWidgetProps) {
   return (
     <div className={className || "fixed top-12 right-4 z-0"}>
       <div
-        className="rounded border p-5 min-w-[180px] lg:min-w-[200px] bg-cover bg-center"
+        className="rounded-4xl p-5 min-w-[180px] lg:min-w-[200px] bg-cover bg-center shadow-lg"
         style={{ backgroundImage: `url('${bgImage}')` }}
       >
         <div className="flex items-center gap-2 mb-1">
