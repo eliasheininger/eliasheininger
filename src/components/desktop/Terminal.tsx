@@ -133,7 +133,7 @@ export default function Terminal({ isOpen, zIndex, onClose, onFocus, onMinimize 
 
   return (
     <div
-      className={`absolute bg-[#1e1e1e] shadow-2xl overflow-hidden rounded border flex flex-col ${
+      className={`absolute bg-[#1e1e1e]/95 backdrop-blur-xl shadow-2xl overflow-hidden rounded-4xl flex flex-col ${
         isDragging ? "cursor-grabbing" : ""
       } ${isResizing ? "select-none" : ""} ${isMinimizing ? "pointer-events-none" : ""}`}
       style={{
